@@ -1,0 +1,1460 @@
+/*
+ * KLANGSAMUT CSS STYLESHEET
+ * ---------------------------
+ * 1. :root (Variables)
+ * 2. Global & Reset
+ * 3. Main Layout (Sidebar & Header)
+ * 4. Guest Layout (Login/Register)
+ * 5. Components (ส่วนประกอบย่อย)
+ * 6. Forms & Buttons
+ * 7. Utility Classes
+ * ---------------------------
+ */
+
+/* --- 1. :root (ตัวแปรสีและธีม) --- */
+:root {
+    /* Theme Colors (KlangSamut) */
+    --color-primary: #00695C;
+    --color-primary-hover: #004d40;
+    --color-secondary: #BDC3C7;
+    --color-secondary-hover: #aeb5b9;
+    --color-danger: #C0392B;
+    --color-danger-hover: #a93226;
+    --color-success: #27AE60;
+    --color-success-hover: #229954;
+
+    /* Text Colors */
+    --color-text-dark: #1f2937;
+    --color-text-base: #374151;
+    --color-text-light: #6b7280;
+    --color-text-white: #ffffff;
+
+    /* Background Colors */
+    --color-bg-white: #ffffff;
+    --color-bg-page: #f9fafb;
+    --color-bg-guest: #f3f4f6;
+    --color-bg-hover: #f3f4f6;
+
+    /* Border Colors */
+    --color-border-light: #e5e7eb;
+    --color-border-input: #d1d5db;
+
+    /* Other */
+    --shadow-base: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --focus-shadow: 0 0 0 3px rgba(0, 105, 92, 0.2);
+    --border-radius-base: 6px;
+    --border-radius-card: 8px;
+}
+
+/* --- 2. Global & Reset --- */
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    background-color: var(--color-bg-guest);
+    /* ใช้สีพื้นหลังของ guest เป็น default */
+    margin: 0;
+    color: var(--color-text-base);
+}
+
+/* [x-cloak] ซ่อน element จนกว่า Alpine.js จะโหลดเสร็จ */
+[x-cloak] {
+    display: none !important;
+}
+
+/* --- 3. Main Layout (Sidebar & Header) --- */
+.layout-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background-color: var(--color-bg-white);
+    border-right: 1px solid var(--color-border-light);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+}
+
+/* 2. Main Content (ส่วนขวา) */
+.main-content {
+    flex-grow: 1;
+    margin-left: 260px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg-page);
+    padding-top: 25px;
+
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    background-color: var(--color-bg-white);
+    border-bottom: 1px solid var(--color-border-light);
+    height: 65px;
+    box-sizing: border-box;
+
+    /* --- เพิ่ม 6 บรรทัดนี้ --- */
+    position: fixed;
+    top: 0;
+    left: 260px;
+    /* ความกว้างของ Sidebar */
+    right: 0;
+    /* ยืดไปทางขวาสุด */
+    width: calc(100% - 260px);
+    /* คำนวณความกว้างที่เหลือ */
+    z-index: 10;
+    /* ทำให้อยู่บนสุดเสมอ */
+}
+
+.page-content {
+    padding: 2rem;
+    flex-grow: 1;
+}
+
+/* --- 4. Guest Layout (Login/Register) --- */
+.guest-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--color-bg-guest);
+    box-sizing: border-box;
+}
+
+.guest-card {
+    width: 100%;
+    max-width: 450px;
+    padding: 2.5rem;
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--shadow-card);
+}
+
+.guest-logo {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 1.5rem auto;
+    display: block;
+}
+
+.guest-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+}
+
+/* --- 5. Components (ส่วนประกอบย่อย) --- */
+
+/* Sidebar Components */
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border-light);
+    height: 65px;
+    box-sizing: border-box;
+}
+
+.sidebar-logo-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.sidebar-logo-text {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.sidebar-menu {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar-header {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+}
+
+.sidebar-link {
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius-base);
+    text-decoration: none;
+    color: var(--color-text-base);
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-link:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text-white);
+}
+
+.sidebar-link.active {
+    background-color: var(--color-primary);
+    color: var(--color-text-white);
+}
+
+/* Header Components */
+.user-menu {
+    position: relative;
+}
+
+.user-menu-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 1.1em;
+
+    div {
+        color: var(--color-primary-hover);
+    }
+}
+
+.hamburger-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-text-light);
+
+    &:hover,
+    &.active {
+        color: var(--color-primary);
+    }
+}
+
+.user-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 0.5rem;
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--shadow-base);
+    width: 200px;
+    z-index: 50;
+    padding: 0.5rem 0;
+}
+
+.dropdown-link {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    color: var(--color-text-base);
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-link:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text-white);
+}
+
+.header-guest-menu {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    a {
+        text-decoration: none;
+        color: var(--color-text-base);
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+            color: var(--color-primary);
+        }
+    }
+}
+
+.header-guest-link {
+    color: var(--color-text-base);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.header-guest-link:hover {
+    text-decoration: underline;
+    color: var(--color-primary);
+}
+
+.content-container {
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    min-width: 1280px;
+    padding-top: 25px;
+}
+
+.modal-delete-wrapper {
+    display: inline-block;
+}
+
+.modal-delete-form {
+    display: inline;
+}
+
+/* --- 6. Forms & Buttons --- */
+/* Buttons */
+.btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: var(--border-radius-base);
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 8px;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-white);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-text-dark);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secondary-hover);
+}
+
+.btn-danger {
+    background-color: var(--color-danger);
+    color: var(--color-text-white);
+}
+
+.btn-danger:hover {
+    background-color: var(--color-danger-hover);
+}
+
+.btn-success {
+    background-color: var(--color-success);
+    color: var(--color-text-white);
+}
+
+.btn-success:hover {
+    background-color: var(--color-success-hover);
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 500;
+    color: var(--color-text-base);
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: var(--color-text-dark);
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-input);
+    border-radius: var(--border-radius-base);
+    box-sizing: border-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: var(--color-primary);
+    outline: 0;
+    box-shadow: var(--focus-shadow);
+}
+
+.form-error {
+    color: var(--color-danger);
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+/* Guest Form Specifics */
+.guest-links-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.guest-link {
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+.guest-link:hover {
+    color: var(--color-primary-hover);
+}
+
+.guest-form-action {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+/* แก้ไข SASS ที่ซ้อนกันมา ให้เป็น CSS ที่ถูกต้อง */
+.guest-form-action .btn {
+    width: 50%;
+    height: 2.5rem;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.guest-register-link {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* --- 7. Utility Classes (คลาสเอนกประสงค์) --- */
+.mt-1rem {
+    margin-top: 1rem;
+}
+
+.text-muted {
+    color: #555;
+    /* เก็บไว้เผื่อต้องการใช้สีนี้โดยเฉพาะ */
+}
+
+.btn-full-width {
+    width: 100%;
+}
+
+.guest-links-container.justify-end {
+    justify-content: flex-end;
+}
+
+/* ===== Search Form Styles ===== */
+.search-form {
+    display: flex;
+    gap: 0.5rem;
+    /* ระยะห่างระหว่างช่องค้นหากับปุ่ม */
+    margin-bottom: 1.5rem;
+}
+
+.search-form .form-control {
+    flex-grow: 1;
+    /* ให้ช่องค้นหายาวเต็มพื้นที่ */
+    max-width: 400px;
+    /* จำกัดความยาวสูงสุด */
+}
+
+/* แก้ไขปุ่มในฟอร์มให้สูงเท่า input */
+.search-form .btn {
+    height: calc(0.75rem * 2 + 1rem * 1 + 2px);
+    /* (padding * 2 + font-size + border * 2) */
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+/* ===== Form Actions Wrapper ===== */
+/* (ใช้ในหน้า Create/Edit เพื่อจัดกลุ่มปุ่ม) */
+
+.form-actions {
+    display: flex;
+    gap: 0.5rem;
+    /* ระยะห่างระหว่างปุ่ม */
+    margin-top: 1.5rem;
+    align-items: center;
+}
+
+/* --- 9. Breadcrumbs Styles --- */
+.breadcrumbs {
+    padding-bottom: 1.5rem;
+    /* เว้นระยะห่างจาก Title */
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    /* สีของหน้าปัจจุบัน (สีเทาอ่อน) */
+}
+
+/* สไตล์ของลิงก์ (หน้าที่ผ่านมาแล้ว) */
+.breadcrumbs a {
+    color: var(--color-primary);
+    /* สีหลัก (Teal) */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+/* ตัวคั่น (Separator) */
+.breadcrumbs .separator {
+    margin: 0 0.5rem;
+    color: var(--color-border-input);
+    /* สีเทาจางๆ */
+}
+
+/* --- 8. Pagination Styles (for Bootstrap 5 Template) --- */
+
+/* 1. คอนเทนเนอร์หลัก (nav) */
+.paginate nav.d-flex {
+    margin-top: 1.5rem;
+}
+
+/* 2. รายการ (ul) */
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: var(--border-radius-base);
+}
+
+/* 3. ลิงก์ (a) และ กล่อง (span) */
+.page-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    /* สีหลัก (Teal) */
+    text-decoration: none;
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-input);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* 4. การซ้อนขอบ (ทำให้สวย) */
+.page-item {
+    margin-left: -1px;
+}
+
+/* 5. Hover (เมื่อเมาส์ชี้) */
+.page-item:not(.active):not(.disabled) .page-link:hover {
+    background-color: var(--color-bg-hover);
+}
+
+/* 6. หน้าปัจจุบัน (Active) */
+.page-item.active .page-link {
+    z-index: 3;
+    color: var(--color-text-white);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+/* 7. หน้าที่กดไม่ได้ (Disabled) */
+.page-item.disabled .page-link {
+    color: var(--color-text-light);
+    pointer-events: none;
+    background-color: var(--color-bg-hover);
+}
+
+/* 8. จัดการมุม (โค้งแรก/สุดท้าย) */
+.page-item:first-child .page-link {
+    border-top-left-radius: var(--border-radius-base);
+    border-bottom-left-radius: var(--border-radius-base);
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: var(--border-radius-base);
+    border-bottom-right-radius: var(--border-radius-base);
+}
+
+/* 9. ข้อความ "Showing 1 to 10..." */
+p.small.text-muted {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    margin: 0;
+    /* ลบ margin ที่ไม่ต้องการ */
+}
+
+/* --- 10. Admin Index Page Styles --- */
+
+/* 1. จัดระเบียบส่วนหัว (Title + Add New Button) */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    /* เว้นระยะห่างจากแถบค้นหา */
+    border-bottom: 1px solid var(--color-border-light);
+    padding-bottom: 1.5rem;
+}
+
+/* (เราจะลบเส้นใต้ h1 ที่เคยตั้งไว้ทั่วโลก) */
+.page-header h1 {
+    margin: 0;
+    border-bottom: none;
+}
+
+/* 2. จัดสไตล์แถบค้นหา (Search Form) */
+/* (เรามี .search-form อยู่แล้ว แต่จะปรับปรุง) */
+.search-form {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+/* 3. จัดสไตล์ตาราง (Table) */
+.table th {
+    /* ทำให้หัวตารางชัดเจนขึ้น */
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border-light);
+}
+
+.table td {
+    padding: 1rem;
+    vertical-align: middle;
+    border: 1px solid var(--color-border-light);
+    /* <-- จัดให้รูปภาพและข้อความอยู่กึ่งกลางแนวตั้ง */
+}
+
+/* 5. สไตล์สำหรับปุ่ม Actions (Edit/Delete) */
+.table-actions {
+    display: flex;
+    gap: 0.5rem;
+    /* เว้นระยะห่างระหว่างปุ่ม */
+}
+
+/* 6. จัดสไตล์ Pagination */
+.paginate {
+    margin-bottom: 10px;
+}
+
+.form-control select,
+.form-control option {
+    height: auto;
+    cursor: pointer;
+}
+
+/* --- 12. Textarea Fix --- */
+/* (ทำให้ <textarea> ที่ใช้คลาส .form-control มีขนาดเริ่มต้นที่เหมาะสม) */
+.form-control[rows] {
+    height: auto;
+    /* ให้มันยืดหยุ่น */
+}
+
+/* --- 13. Checkbox List Styles --- */
+.checkbox-list-container {
+    max-height: 250px;
+    /* จำกัดความสูง (ถ้ามีเยอะจะมี Scrollbar) */
+    overflow-y: auto;
+    border: 1px solid var(--color-border-input);
+    border-radius: var(--border-radius-base);
+    padding: 1rem;
+    background-color: var(--color-bg-white);
+}
+
+.checkbox-list {
+    display: grid;
+    /* แบ่งเป็น 3 คอลัมน์ (ปรับ '3' ได้ตามชอบ) */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.checkbox-list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-list-item label {
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* --- 14. Custom Checkbox Styles --- */
+
+/* 1. จัดตำแหน่งให้ .checkbox-list-item */
+.checkbox-list-item {
+    display: block;
+    /* (ยกเลิก flex) */
+    position: relative;
+    /* (เพื่อให้ ::before ::after ทำงาน) */
+    padding-left: 2rem;
+    /* (เว้นที่ให้กล่องใหม่) */
+    margin-bottom: 0.5rem;
+    /* (เว้นระยะห่างระหว่างแถว) */
+    cursor: pointer;
+}
+
+/* 2. ซ่อน Checkbox ของจริง (แต่มันยังทำงานอยู่) */
+.checkbox-list-item input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* 3. สร้าง "กล่องเปล่า" (::before) */
+.checkbox-list-item label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.2em;
+    height: 1.2em;
+    border: 2px solid var(--color-border-input);
+    border-radius: var(--border-radius-base);
+    background: var(--color-bg-white);
+    transition: all 0.2s ease;
+}
+
+/* 4. สร้าง "เครื่องหมายถูก" (::after) (ซ่อนไว้ก่อน) */
+.checkbox-list-item label::after {
+    content: '';
+    position: absolute;
+    left: 0.45em;
+    /* 7px */
+    top: 0.15em;
+    /* 3px */
+    width: 0.3em;
+    /* 5px */
+    height: 0.7em;
+    /* 11px */
+    border: solid var(--color-text-white);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    /* ซ่อนไว้ */
+    transition: opacity 0.2s ease;
+}
+
+/* 5. (สำคัญ!) เมื่อ Checkbox ถูกติ๊ก ( :checked ) */
+.checkbox-list-item input[type="checkbox"]:checked+label::before {
+    background-color: var(--color-primary);
+    /* <-- 1. เปลี่ยนสีพื้นหลังเป็นสีธีม */
+    border-color: var(--color-primary);
+    /* <-- 2. เปลี่ยนสีขอบเป็นสีธีม */
+}
+
+.checkbox-list-item input[type="checkbox"]:checked+label::after {
+    opacity: 1;
+    /* <-- 3. แสดงเครื่องหมายถูก */
+}
+
+/* 6. (สำหรับ Accessibility) เมื่อ Focus */
+.checkbox-list-item input[type="checkbox"]:focus+label::before {
+    box-shadow: var(--focus-shadow);
+}
+
+span.highlight-text {
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+/* --- 15. Book Show Page Styles --- */
+
+/* 1. โครงสร้างหลัก (2 คอลัมน์) */
+.book-show-header-actions {
+    display: flex;
+    justify-content: space-between;
+    /* (ซ้าย/ขวา) */
+    align-items: center;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+/* 2. กลุ่มปุ่มด้านขวา (Edit/Delete) */
+.book-show-header-actions .right-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    /* ระยะห่างระหว่างปุ่ม */
+}
+
+.book-show-grid {
+    display: grid;
+    /* คอลัมน์ซ้าย (ปก) 250px, คอลัมน์ขวา (ข้อมูล) 1fr (ที่เหลือ) */
+    grid-template-columns: 250px 1fr;
+    gap: 2.5rem;
+    /* ระยะห่างระหว่าง 2 คอลัมน์ */
+}
+
+/* (สำหรับจอมือถือ: ให้เป็น 1 คอลัมน์) */
+@media (max-width: 768px) {
+    .book-show-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 2. คอลัมน์ซ้าย (ปก) */
+.book-cover-wrapper img {
+    width: 100%;
+    border-radius: var(--border-radius-base);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.book-cover-placeholder {
+    /* ถ้าไม่มีรูป */
+    width: 100%;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg-hover);
+    color: var(--color-text-light);
+    border: 1px dashed var(--color-border-input);
+    border-radius: var(--border-radius-base);
+}
+
+/* 3. คอลัมน์ขวา (ข้อมูล) */
+.book-details-wrapper h1 {
+    /* Title */
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    border-bottom: none;
+    line-height: 1.2;
+}
+
+.book-show-author {
+    /* Author */
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+}
+
+.book-show-author a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.book-show-author a:hover {
+    text-decoration: underline;
+}
+
+/* 4. ส่วนเนื้อหา (Synopsis/Description) */
+.book-show-section {
+    margin-bottom: 2rem;
+}
+
+.book-show-section h3 {
+    /* หัวข้อ (Synopsis, Genres) */
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    border-bottom: 1px solid var(--color-border-light);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.book-show-synopsis {
+    font-size: 1rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    /* (สำคัญ) ทำให้เคารพการขึ้นบรรทัดใหม่จาก <textarea> */
+}
+
+/* 5. ปุ่ม (Back/Edit/Delete) */
+.book-show-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border-light);
+    margin-top: 2rem;
+}
+
+/* 6. (CSS สำหรับตาราง) ลิงก์ในตาราง */
+.table-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.table-link:hover {
+    text-decoration: underline;
+}
+
+/* --- Notification (Alpine.js) --- */
+.notification {
+    position: fixed;
+    /* (ตำแหน่งใหม่: กลางล่าง) */
+    bottom: 20px;
+    left: 50%;
+
+    /* (สไตล์เดิม) */
+    padding: 15px 25px;
+    border-radius: var(--border-radius-card);
+    color: var(--color-text-white);
+    font-weight: bold;
+    box-shadow: var(--shadow-card);
+    z-index: 100;
+
+    /* (ส่วนควบคุมอนิเมชัน) */
+    transform: translateX(-50%) translateY(200%);
+    /* 1. ซ่อนไว้ล่างจอ (เริ่มต้น) */
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    /* (เพิ่ม effect เด้งเล็กน้อย) */
+}
+
+/* (คลาสใหม่) เมื่อ 'show' ถูกเพิ่มโดย Alpine.js */
+.notification.show {
+    transform: translateX(-50%) translateY(0);
+    /* 2. เลื่อนขึ้นมา (แสดง) */
+    opacity: 1;
+}
+
+/* (สไตล์สีเหมือนเดิม) */
+.notification-success {
+    background-color: var(--color-success);
+}
+
+.notification-error {
+    background-color: var(--color-danger);
+}
+
+.notification-close {
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+/* --- 17. Profile Page Styles --- */
+.profile-section {
+    padding: 2rem;
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.profile-section h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.profile-section p {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* (สำหรับจัดปุ่ม Save) */
+.profile-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* (สำหรับข้อความ "Saved.") */
+.profile-saved-message {
+    color: var(--color-success);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* --- 18. Dashboard Stats Grid --- */
+.stats-grid {
+    display: grid;
+    /* 1 คอลัมน์ (มือถือ), 2 คอลัมน์ (แท็บเล็ต), 4 คอลัมน์ (เดสก์ท็อป) */
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* (จอขนาดกลาง) */
+@media (min-width: 640px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* (จอขนาดใหญ่) */
+@media (min-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* สไตล์ของการ์ดสถิติ */
+.stat-card {
+    display: block;
+    padding: 1.5rem 2rem;
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+}
+
+.stat-card-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    /* ใช้สีธีม */
+    margin-top: 0.5rem;
+    display: block;
+    /* ทำให้เป็น block */
+}
+
+/* --- 19. Landing Page Styles --- */
+
+/* (ทำให้ปุ่ม .btn-lg ใหญ่ขึ้น) */
+.btn-lg {
+    padding: 0.8rem 1.8rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--color-bg-white);
+}
+
+/* 1. Header (ส่วนบน) */
+.landing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    /* 5% padding 2 ข้าง */
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.landing-logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+}
+
+.landing-logo {
+    width: 45px;
+    height: 45px;
+}
+
+.landing-auth-links {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* 2. Content (ส่วนเนื้อหา) */
+.landing-content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 5%;
+    text-align: center;
+}
+
+.landing-hero {
+    max-width: 800px;
+}
+
+.landing-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.landing-subtitle {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--color-primary);
+    /* สีธีม */
+    margin-bottom: 1.5rem;
+}
+
+.landing-description {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+}
+
+.landing-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* --- 20. Guest Back Link --- */
+.guest-back-link-wrapper {
+    width: 100%;
+    max-width: 450px;
+    padding: 0 2.5rem;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.guest-back-link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-normal);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.guest-back-link:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+/* --- 21. User Layout Styles --- */
+.user-layout-container {
+    min-height: 100vh;
+    background-color: var(--color-bg-page);
+}
+
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 65px;
+    padding: 0 2rem;
+    background-color: var(--color-bg-white);
+    border-bottom: 1px solid var(--color-border-light);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.user-header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.user-header-nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.user-nav-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text-base);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+}
+
+.user-nav-link:hover,
+.user-nav-link.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.user-header-right {
+    position: relative;
+}
+
+
+
+/* --- 22. Book Carousel Styles --- */
+.book-carousel-section {
+    margin-bottom: 2rem;
+}
+
+.book-carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border-light);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.book-carousel-header h2 {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin: 0;
+}
+
+.book-carousel-container {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    /* (ทำให้เลื่อนแนวนอนได้) */
+    padding-bottom: 1rem;
+}
+
+.book-card {
+    flex: 0 0 160px;
+    /* (กำหนดความกว้างตายตัว 160px) */
+    text-decoration: none;
+}
+
+.book-card-cover {
+    width: 160px;
+    height: 230px;
+    border-radius: var(--border-radius-base);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 0.75rem;
+}
+
+.book-card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-base);
+}
+
+.book-card-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg-hover);
+    color: var(--color-text-light);
+    font-size: 0.8em;
+    border-radius: var(--border-radius-base);
+}
+
+.book-card:hover .book-card-cover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.book-card-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    line-height: 1.4;
+    /* (จำกัดข้อความ 2 บรรทัด) */
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-card-author {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+}
+
+/* --- 23. Footer Styles --- */
+.app-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: auto;
+    padding: 0.5rem 2rem;
+    border-top: 1px solid var(--color-border-light);
+
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+}
+
+.app-footer .footer-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.app-footer .footer-links a {
+    color: var(--color-text-light);
+    text-decoration: none;
+}
+
+.app-footer .footer-links a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+.landing-footer-wrapper {
+    background-color: var(--color-bg-white);
+    border-top: 1px solid var(--color-border-light);
+    padding: 1rem 5%;
+}
+
+.landing-footer-wrapper .app-footer {
+    max-width: 1280px;
+    margin: 0 auto;
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+/* --- 24. Search Clear Button --- */
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+}
+
+/* (ปรับ Input ให้เต็ม wrapper) */
+.search-input-wrapper .form-control {
+    width: 100%;
+    /* (เพิ่ม padding ขวา เพื่อไม่ให้ข้อความทับปุ่ม x) */
+    padding-right: 2.5rem;
+}
+
+/* (สไตล์ปุ่ม x) */
+.search-clear-btn {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    font-size: 1.75rem;
+    /* (ขนาดตัว x) */
+    font-weight: 600;
+    color: var(--color-text-light);
+    padding: 0 0.5rem;
+    line-height: 1;
+}
+
+.search-clear-btn:hover {
+    color: var(--color-danger);
+}
+
+/* --- 25. User Genre Sidebar --- */
+
+/* 1. คอนเทนเนอร์หลักของหน้า User (จากเดิม) */
+.user-main-content {
+    max-width: 1536px;
+    min-width: 1280px;
+    margin: 0 auto;
+}
+
+/* 2. (ใหม่) Grid 2 คอลัมน์ */
+.user-grid-container {
+    display: grid;
+    /* (Sidebar 240px, เนื้อหา 1fr (ที่เหลือ)) */
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
+    min-width: 1280px;
+    max-width: 1536px;
+    /* (ระยะห่างระหว่าง Sidebar กับเนื้อหา) */
+}
+
+/* 3. (ใหม่) Sidebar Genres */
+.user-genres-sidebar {
+    background-color: var(--color-bg-white);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+    top: calc(65px + 2rem);
+    position: sticky;
+    padding: 1rem;
+}
+
+.sidebar-genre-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.genre-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    /* (ระยะห่างระหว่างลิงก์) */
+}
+
+.genre-link {
+    display: block;
+    padding: 0.4rem 0.5rem;
+    text-decoration: none;
+    color: var(--color-text-base);
+    font-size: 0.9rem;
+    border-radius: var(--border-radius-base);
+    transition: all 0.2s ease;
+}
+
+.genre-link:hover {
+    background-color: var(--color-bg-hover);
+    color: var(--color-primary);
+}
+
+.genre-link.active {
+    background-color: var(--color-primary);
+    color: var(--color-text-white);
+    font-weight: 600;   
+}
+
+@media (max-width: 768px) {
+    .user-grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .user-genres-sidebar {
+        position: static;
+        margin-bottom: 1rem;
+    }
+}
