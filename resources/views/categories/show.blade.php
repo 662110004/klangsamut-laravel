@@ -29,7 +29,7 @@ $layoutComponent = (Auth::check() && Auth::user()->role == 'admin')
                     <button @click.prevent="showConfirm = true" class="btn btn-danger">Delete</button>
                     <div x-show="showConfirm" class="modal-overlay" @click.away="showConfirm = false" x-cloak>
                         <div class="modal-content">
-                            <p>Are you sure you want to delete '{{ $category->name }}'?</p>
+                            <p>Are you sure you want to delete <span>"{{ $category->name }}" </span>?</p>
                             <form method="POST" action="{{ route('admin.categories.destroy', $category) }}" class="modal-delete-form">
                                 @csrf
                                 @method('DELETE')

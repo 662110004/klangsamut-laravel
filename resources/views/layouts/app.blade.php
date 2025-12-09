@@ -100,7 +100,7 @@
                 show = true; /* 2. สั่งให้ 'show' (เริ่มอนิเมชัน) */
                 
                 /* 3. ตั้งเวลา 3 วินาที เพื่อซ่อน */
-                setTimeout(() => show = false, 3000); 
+                setTimeout(() => show = false, 4000); 
             })
         "
                     :class="{ 'show': show }"

@@ -1,17 +1,15 @@
 /*
- * KLANGSAMUT CSS STYLESHEET
- * ---------------------------
- * 1. :root (Variables)
- * 2. Global & Reset
- * 3. Main Layout (Sidebar & Header)
- * 4. Guest Layout (Login/Register)
- * 5. Components (ส่วนประกอบย่อย)
- * 6. Forms & Buttons
- * 7. Utility Classes
- * ---------------------------
+ * ไฟล์นี้คือไฟล์ CSS หลักของโปรเจกต์ (resources/css/app.css)
+ * มันจะถูก compile โดย Vite และนำไปใช้ในไฟล์ Layout หลัก
+ * เพื่อกำหนดหน้าตาของเว็บแอปพลิเคชันทั้งหมด
  */
 
 /* --- 1. :root (ตัวแปรสีและธีม) --- */
+/*
+ * ส่วนนี้ประกาศตัวแปร CSS (CSS Variables) ที่ใช้กำหนดธีมสีหลักของเว็บ
+ * เช่น สีหลัก (primary), สีพื้นหลัง, สีตัวอักษร, เงา และขอบ
+ * ไฟล์ที่เกี่ยวข้อง: ถูกเรียกใช้ในทุกไฟล์ที่ใช้ CSS นี้
+ */
 :root {
     /* Theme Colors (KlangSamut) */
     --color-primary: #00695C;
@@ -48,6 +46,11 @@
 }
 
 /* --- 2. Global & Reset --- */
+/*
+ * สไตล์ตั้งต้นสำหรับทั้งโปรเจกต์
+ * กำหนด font, สีพื้นหลัง, และสีตัวอักษรเริ่มต้น
+ * ไฟล์ที่เกี่ยวข้อง: layouts/app.blade.php, layouts/guest.blade.php, layouts/user.blade.php
+ */
 body {
     font-family: 'Open Sans', Arial, sans-serif;
     background-color: var(--color-bg-guest);
@@ -56,12 +59,16 @@ body {
     color: var(--color-text-base);
 }
 
-/* [x-cloak] ซ่อน element จนกว่า Alpine.js จะโหลดเสร็จ */
+/* [x-cloak] ซ่อน element จนกว่า Alpine.js จะโหลดเสร็จ (ป้องกันการกระพริบ) */
 [x-cloak] {
     display: none !important;
 }
 
 /* --- 3. Main Layout (Sidebar & Header) --- */
+/*
+ * โครงสร้างหลักของหน้า Admin (ส่วนที่มี Sidebar ด้านซ้าย และเนื้อหาด้านขวา)
+ * ไฟล์ที่เกี่ยวข้อง: layouts/app.blade.php (ซึ่งเป็น Layout หลักของ Admin)
+ */
 .layout-container {
     display: flex;
     min-height: 100vh;
@@ -83,11 +90,12 @@ body {
 .main-content {
     flex-grow: 1;
     margin-left: 260px;
+    /* เท่ากับความกว้าง Sidebar */
     display: flex;
     flex-direction: column;
     background-color: var(--color-bg-page);
-    padding-top: 25px;
-
+    padding-top: 65px;
+    /* เพิ่ม padding-top เพื่อหลบ Header ที่ fixed */
 }
 
 .top-header {
@@ -100,7 +108,7 @@ body {
     height: 65px;
     box-sizing: border-box;
 
-    /* --- เพิ่ม 6 บรรทัดนี้ --- */
+    /* --- ทำให้ Header ยึดอยู่ด้านบน --- */
     position: fixed;
     top: 0;
     left: 260px;
@@ -119,6 +127,12 @@ body {
 }
 
 /* --- 4. Guest Layout (Login/Register) --- */
+/*
+ * โครงสร้างสำหรับหน้าที่ยังไม่ได้ล็อกอิน (เช่น หน้า Login, Register)
+ * จะจัดเนื้อหาอยู่กึ่งกลางจอ
+ * ไฟล์ที่เกี่ยวข้อง: layouts/guest.blade.php
+ * (ซึ่งถูกใช้โดย: auth/login.blade.php, auth/register.blade.php, auth/forgot-password.blade.php)
+ */
 .guest-container {
     min-height: 100vh;
     display: flex;
@@ -156,7 +170,10 @@ body {
 
 /* --- 5. Components (ส่วนประกอบย่อย) --- */
 
-/* Sidebar Components */
+/*
+ * ส่วนประกอบย่อยที่ใช้ใน Sidebar (Admin)
+ * ไฟล์ที่เกี่ยวข้อง: layouts/navigation.blade.php (หรือ partial ที่เป็น sidebar)
+ */
 .sidebar-logo {
     display: flex;
     align-items: center;
@@ -214,7 +231,10 @@ body {
     color: var(--color-text-white);
 }
 
-/* Header Components */
+/*
+ * ส่วนประกอบย่อยที่ใช้ใน Header (Admin)
+ * ไฟล์ที่เกี่ยวข้อง: layouts/navigation.blade.php (ส่วน header)
+ */
 .user-menu {
     position: relative;
 }
@@ -230,21 +250,23 @@ body {
     color: var(--color-primary);
     font-weight: bold;
     font-size: 1.1em;
+}
 
-    div {
-        color: var(--color-primary-hover);
-    }
+/* (แก้ไข) นี่คือ CSS ที่ถูกต้อง (จากเดิมที่เป็น SASS) */
+.user-menu-button div {
+    color: var(--color-primary-hover);
 }
 
 .hamburger-icon {
     width: 1.25rem;
     height: 1.25rem;
     color: var(--color-text-light);
+}
 
-    &:hover,
-    &.active {
-        color: var(--color-primary);
-    }
+/* (แก้ไข) นี่คือ CSS ที่ถูกต้อง (จากเดิมที่เป็น SASS) */
+.hamburger-icon:hover,
+.hamburger-icon.active {
+    color: var(--color-primary);
 }
 
 .user-dropdown {
@@ -273,33 +295,34 @@ body {
     color: var(--color-text-white);
 }
 
+/*
+ * (Refactored)
+ * รวม .header-guest-menu a และ .header-guest-link เข้าด้วยกันเนื่องจากซ้ำซ้อน
+ * ใช้สำหรับลิงก์ Login/Register ในหน้า Landing Page
+ * ไฟล์ที่เกี่ยวข้อง: welcome.blade.php
+ */
 .header-guest-menu {
     display: flex;
     gap: 1rem;
     align-items: center;
-
-    a {
-        text-decoration: none;
-        color: var(--color-text-base);
-        font-weight: 500;
-
-        &:hover {
-            text-decoration: underline;
-            color: var(--color-primary);
-        }
-    }
 }
 
+/* (แก้ไข) นี่คือ CSS ที่ถูกต้อง และรวม .header-guest-link เข้ามาด้วย */
+.header-guest-menu a,
 .header-guest-link {
+    text-decoration: none;
     color: var(--color-text-base);
     font-weight: 500;
-    text-decoration: none;
 }
 
+.header-guest-menu a:hover,
 .header-guest-link:hover {
     text-decoration: underline;
     color: var(--color-primary);
 }
+
+/* (ลบ .header-guest-link และ :hover ของมันออก เนื่องจากรวมไปไว้ข้างบนแล้ว) */
+
 
 .content-container {
     background-color: var(--color-bg-white);
@@ -307,7 +330,8 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
     min-width: 1280px;
-    padding-top: 25px;
+    padding: 2rem;
+    /* (เปลี่ยน) ใช้ padding 2rem รอบด้านแทน padding-top */
 }
 
 .modal-delete-wrapper {
@@ -319,7 +343,11 @@ body {
 }
 
 /* --- 6. Forms & Buttons --- */
-/* Buttons */
+/*
+ * สไตล์กลางสำหรับปุ่ม (Buttons) และฟอร์ม (Forms) ทุกหน้า
+ * ไฟล์ที่เกี่ยวข้อง: ใช้ในเกือบทุกไฟล์ Blade ที่มีฟอร์ม
+ * (เช่น: auth/login.blade.php, profile/edit.blade.php, admin/books/create.blade.php)
+ */
 .btn {
     padding: 10px 18px;
     border: none;
@@ -429,9 +457,8 @@ body {
     margin-top: 1.5rem;
 }
 
-/* แก้ไข SASS ที่ซ้อนกันมา ให้เป็น CSS ที่ถูกต้อง */
 .guest-form-action .btn {
-    width: 50%;
+    max-width: 70%;
     height: 2.5rem;
     font-size: 1.1em;
     font-weight: bold;
@@ -443,6 +470,9 @@ body {
 }
 
 /* --- 7. Utility Classes (คลาสเอนกประสงค์) --- */
+/*
+ * คลาสเล็กๆ สำหรับช่วยจัด layout ทั่วไป
+ */
 .mt-1rem {
     margin-top: 1rem;
 }
@@ -453,12 +483,18 @@ body {
 }
 
 .btn-full-width {
-    width: 100%;
+    width: auto;
 }
 
 .guest-links-container.justify-end {
     justify-content: flex-end;
 }
+
+/* --- 8. Search, Pagination & Breadcrumbs --- */
+/*
+ * สไตล์สำหรับส่วนประกอบที่ใช้บ่อยในหน้า Admin
+ * ไฟล์ที่เกี่ยวข้อง: admin/books/index.blade.php, admin/books/create.blade.php
+ */
 
 /* ===== Search Form Styles ===== */
 .search-form {
@@ -485,7 +521,6 @@ body {
 
 /* ===== Form Actions Wrapper ===== */
 /* (ใช้ในหน้า Create/Edit เพื่อจัดกลุ่มปุ่ม) */
-
 .form-actions {
     display: flex;
     gap: 0.5rem;
@@ -494,42 +529,17 @@ body {
     align-items: center;
 }
 
-/* --- 9. Breadcrumbs Styles --- */
-.breadcrumbs {
-    padding-bottom: 1.5rem;
-    /* เว้นระยะห่างจาก Title */
-    font-size: 0.9rem;
-    color: var(--color-text-light);
-    /* สีของหน้าปัจจุบัน (สีเทาอ่อน) */
-}
-
-/* สไตล์ของลิงก์ (หน้าที่ผ่านมาแล้ว) */
-.breadcrumbs a {
-    color: var(--color-primary);
-    /* สีหลัก (Teal) */
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.breadcrumbs a:hover {
-    text-decoration: underline;
-}
-
-/* ตัวคั่น (Separator) */
-.breadcrumbs .separator {
-    margin: 0 0.5rem;
-    color: var(--color-border-input);
-    /* สีเทาจางๆ */
-}
-
-/* --- 8. Pagination Styles (for Bootstrap 5 Template) --- */
-
-/* 1. คอนเทนเนอร์หลัก (nav) */
+/* --- Pagination Styles (for Bootstrap 5 Template) --- */
+/*
+ * สไตล์สำหรับตัวแบ่งหน้า (Pagination) ของ Laravel
+ * ไฟล์ที่เกี่ยวข้อง: admin/books/index.blade.php, admin/authors/index.blade.php, 
+ * admin/categories/index.blade.php, admin/users/index.blade.php,
+ * books/index.blade.php
+ */
 .paginate nav.d-flex {
     margin-top: 1.5rem;
 }
 
-/* 2. รายการ (ul) */
 .pagination {
     display: flex;
     padding-left: 0;
@@ -537,30 +547,25 @@ body {
     border-radius: var(--border-radius-base);
 }
 
-/* 3. ลิงก์ (a) และ กล่อง (span) */
 .page-link {
     display: block;
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
     color: var(--color-primary);
-    /* สีหลัก (Teal) */
     text-decoration: none;
     background-color: var(--color-bg-white);
     border: 1px solid var(--color-border-input);
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* 4. การซ้อนขอบ (ทำให้สวย) */
 .page-item {
     margin-left: -1px;
 }
 
-/* 5. Hover (เมื่อเมาส์ชี้) */
 .page-item:not(.active):not(.disabled) .page-link:hover {
     background-color: var(--color-bg-hover);
 }
 
-/* 6. หน้าปัจจุบัน (Active) */
 .page-item.active .page-link {
     z-index: 3;
     color: var(--color-text-white);
@@ -568,14 +573,12 @@ body {
     border-color: var(--color-primary);
 }
 
-/* 7. หน้าที่กดไม่ได้ (Disabled) */
 .page-item.disabled .page-link {
     color: var(--color-text-light);
     pointer-events: none;
     background-color: var(--color-bg-hover);
 }
 
-/* 8. จัดการมุม (โค้งแรก/สุดท้าย) */
 .page-item:first-child .page-link {
     border-top-left-radius: var(--border-radius-base);
     border-bottom-left-radius: var(--border-radius-base);
@@ -586,44 +589,39 @@ body {
     border-bottom-right-radius: var(--border-radius-base);
 }
 
-/* 9. ข้อความ "Showing 1 to 10..." */
 p.small.text-muted {
     color: var(--color-text-light);
     font-size: 0.9rem;
     margin: 0;
-    /* ลบ margin ที่ไม่ต้องการ */
 }
 
-/* --- 10. Admin Index Page Styles --- */
-
-/* 1. จัดระเบียบส่วนหัว (Title + Add New Button) */
+/* --- 9. Admin Index Page Styles --- */
+/*
+ * สไตล์สำหรับหน้าตาราง (Index) ของ Admin
+ * ไฟล์ที่เกี่ยวข้อง: admin/books/index.blade.php, admin/authors/index.blade.php,
+ * admin/categories/index.blade.php, admin/users/index.blade.php
+ */
 .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
-    /* เว้นระยะห่างจากแถบค้นหา */
     border-bottom: 1px solid var(--color-border-light);
     padding-bottom: 1.5rem;
 }
 
-/* (เราจะลบเส้นใต้ h1 ที่เคยตั้งไว้ทั่วโลก) */
 .page-header h1 {
     margin: 0;
     border-bottom: none;
 }
 
-/* 2. จัดสไตล์แถบค้นหา (Search Form) */
-/* (เรามี .search-form อยู่แล้ว แต่จะปรับปรุง) */
 .search-form {
     margin-bottom: 1.5rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--color-border-light);
 }
 
-/* 3. จัดสไตล์ตาราง (Table) */
 .table th {
-    /* ทำให้หัวตารางชัดเจนขึ้น */
     padding: 0.75rem 1rem;
     font-weight: 600;
     font-size: 0.9em;
@@ -636,17 +634,13 @@ p.small.text-muted {
     padding: 1rem;
     vertical-align: middle;
     border: 1px solid var(--color-border-light);
-    /* <-- จัดให้รูปภาพและข้อความอยู่กึ่งกลางแนวตั้ง */
 }
 
-/* 5. สไตล์สำหรับปุ่ม Actions (Edit/Delete) */
 .table-actions {
     display: flex;
     gap: 0.5rem;
-    /* เว้นระยะห่างระหว่างปุ่ม */
 }
 
-/* 6. จัดสไตล์ Pagination */
 .paginate {
     margin-bottom: 10px;
 }
@@ -657,17 +651,23 @@ p.small.text-muted {
     cursor: pointer;
 }
 
-/* --- 12. Textarea Fix --- */
-/* (ทำให้ <textarea> ที่ใช้คลาส .form-control มีขนาดเริ่มต้นที่เหมาะสม) */
-.form-control[rows] {
-    height: auto;
-    /* ให้มันยืดหยุ่น */
+.table-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
 }
 
-/* --- 13. Checkbox List Styles --- */
+.table-link:hover {
+    text-decoration: underline;
+}
+
+/* --- 10. Custom Checkbox Styles --- */
+/*
+ * สไตล์สำหรับ Checkbox แบบกำหนดเอง (ใช้ในหน้าสร้าง/แก้ไขหนังสือ)
+ * ไฟล์ที่เกี่ยวข้อง: admin/books/create.blade.php, admin/books/edit.blade.php
+ */
 .checkbox-list-container {
     max-height: 250px;
-    /* จำกัดความสูง (ถ้ามีเยอะจะมี Scrollbar) */
     overflow-y: auto;
     border: 1px solid var(--color-border-input);
     border-radius: var(--border-radius-base);
@@ -677,38 +677,22 @@ p.small.text-muted {
 
 .checkbox-list {
     display: grid;
-    /* แบ่งเป็น 3 คอลัมน์ (ปรับ '3' ได้ตามชอบ) */
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
 }
 
-.checkbox-list-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.checkbox-list-item label {
-    font-weight: 500;
-    cursor: pointer;
-}
-
-/* --- 14. Custom Checkbox Styles --- */
+/* (ลบ .checkbox-list-item ที่ซ้ำซ้อนออก) */
 
 /* 1. จัดตำแหน่งให้ .checkbox-list-item */
 .checkbox-list-item {
     display: block;
-    /* (ยกเลิก flex) */
     position: relative;
-    /* (เพื่อให้ ::before ::after ทำงาน) */
     padding-left: 2rem;
-    /* (เว้นที่ให้กล่องใหม่) */
     margin-bottom: 0.5rem;
-    /* (เว้นระยะห่างระหว่างแถว) */
     cursor: pointer;
 }
 
-/* 2. ซ่อน Checkbox ของจริง (แต่มันยังทำงานอยู่) */
+/* 2. ซ่อน Checkbox ของจริง */
 .checkbox-list-item input[type="checkbox"] {
     position: absolute;
     opacity: 0;
@@ -735,32 +719,24 @@ p.small.text-muted {
     content: '';
     position: absolute;
     left: 0.45em;
-    /* 7px */
     top: 0.15em;
-    /* 3px */
     width: 0.3em;
-    /* 5px */
     height: 0.7em;
-    /* 11px */
     border: solid var(--color-text-white);
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
     opacity: 0;
-    /* ซ่อนไว้ */
     transition: opacity 0.2s ease;
 }
 
-/* 5. (สำคัญ!) เมื่อ Checkbox ถูกติ๊ก ( :checked ) */
+/* 5. เมื่อ Checkbox ถูกติ๊ก ( :checked ) */
 .checkbox-list-item input[type="checkbox"]:checked+label::before {
     background-color: var(--color-primary);
-    /* <-- 1. เปลี่ยนสีพื้นหลังเป็นสีธีม */
     border-color: var(--color-primary);
-    /* <-- 2. เปลี่ยนสีขอบเป็นสีธีม */
 }
 
 .checkbox-list-item input[type="checkbox"]:checked+label::after {
     opacity: 1;
-    /* <-- 3. แสดงเครื่องหมายถูก */
 }
 
 /* 6. (สำหรับ Accessibility) เมื่อ Focus */
@@ -768,48 +744,51 @@ p.small.text-muted {
     box-shadow: var(--focus-shadow);
 }
 
+/* (ย้าย .checkbox-list-item label มาไว้ด้วยกัน) */
+.checkbox-list-item label {
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
 span.highlight-text {
     color: var(--color-primary);
     font-weight: bold;
 }
 
-/* --- 15. Book Show Page Styles --- */
-
-/* 1. โครงสร้างหลัก (2 คอลัมน์) */
+/* --- 11. Book Show Page Styles --- */
+/*
+ * สไตล์สำหรับหน้าแสดงรายละเอียดหนังสือ (ฝั่ง Public)
+ * ไฟล์ที่เกี่ยวข้อง: books/show.blade.php
+ * (อาจใช้กับ: authors/show.blade.php, categories/show.blade.php ด้วย)
+ */
 .book-show-header-actions {
     display: flex;
     justify-content: space-between;
-    /* (ซ้าย/ขวา) */
     align-items: center;
     padding-bottom: 1.5rem;
     margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--color-border-light);
 }
 
-/* 2. กลุ่มปุ่มด้านขวา (Edit/Delete) */
 .book-show-header-actions .right-actions {
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    /* ระยะห่างระหว่างปุ่ม */
 }
 
 .book-show-grid {
     display: grid;
-    /* คอลัมน์ซ้าย (ปก) 250px, คอลัมน์ขวา (ข้อมูล) 1fr (ที่เหลือ) */
     grid-template-columns: 250px 1fr;
     gap: 2.5rem;
-    /* ระยะห่างระหว่าง 2 คอลัมน์ */
 }
 
-/* (สำหรับจอมือถือ: ให้เป็น 1 คอลัมน์) */
 @media (max-width: 768px) {
     .book-show-grid {
         grid-template-columns: 1fr;
     }
 }
 
-/* 2. คอลัมน์ซ้าย (ปก) */
 .book-cover-wrapper img {
     width: 100%;
     border-radius: var(--border-radius-base);
@@ -817,7 +796,6 @@ span.highlight-text {
 }
 
 .book-cover-placeholder {
-    /* ถ้าไม่มีรูป */
     width: 100%;
     height: 350px;
     display: flex;
@@ -829,9 +807,7 @@ span.highlight-text {
     border-radius: var(--border-radius-base);
 }
 
-/* 3. คอลัมน์ขวา (ข้อมูล) */
 .book-details-wrapper h1 {
-    /* Title */
     font-size: 2.5rem;
     font-weight: 700;
     color: var(--color-text-dark);
@@ -842,7 +818,6 @@ span.highlight-text {
 }
 
 .book-show-author {
-    /* Author */
     font-size: 1.25rem;
     font-weight: 500;
     color: var(--color-text-light);
@@ -858,13 +833,11 @@ span.highlight-text {
     text-decoration: underline;
 }
 
-/* 4. ส่วนเนื้อหา (Synopsis/Description) */
 .book-show-section {
     margin-bottom: 2rem;
 }
 
 .book-show-section h3 {
-    /* หัวข้อ (Synopsis, Genres) */
     font-size: 1.2rem;
     font-weight: 600;
     color: var(--color-text-dark);
@@ -877,10 +850,9 @@ span.highlight-text {
     font-size: 1rem;
     line-height: 1.7;
     white-space: pre-wrap;
-    /* (สำคัญ) ทำให้เคารพการขึ้นบรรทัดใหม่จาก <textarea> */
+    /* เคารพการขึ้นบรรทัดใหม่จาก <textarea> */
 }
 
-/* 5. ปุ่ม (Back/Edit/Delete) */
 .book-show-actions {
     display: flex;
     flex-wrap: wrap;
@@ -891,48 +863,31 @@ span.highlight-text {
     margin-top: 2rem;
 }
 
-/* 6. (CSS สำหรับตาราง) ลิงก์ในตาราง */
-.table-link {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.table-link:hover {
-    text-decoration: underline;
-}
-
-/* --- Notification (Alpine.js) --- */
+/* --- 12. Notification (Alpine.js) --- */
+/*
+ * สไตล์สำหรับข้อความแจ้งเตือน (Flash Message) ที่ควบคุมด้วย Alpine.js
+ * ไฟล์ที่เกี่ยวข้อง: layouts/app.blade.php, layouts/user.blade.php (ในส่วนที่วาง notification)
+ */
 .notification {
     position: fixed;
-    /* (ตำแหน่งใหม่: กลางล่าง) */
     bottom: 20px;
     left: 50%;
-
-    /* (สไตล์เดิม) */
     padding: 15px 25px;
     border-radius: var(--border-radius-card);
     color: var(--color-text-white);
     font-weight: bold;
     box-shadow: var(--shadow-card);
     z-index: 100;
-
-    /* (ส่วนควบคุมอนิเมชัน) */
     transform: translateX(-50%) translateY(200%);
-    /* 1. ซ่อนไว้ล่างจอ (เริ่มต้น) */
     opacity: 0;
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    /* (เพิ่ม effect เด้งเล็กน้อย) */
 }
 
-/* (คลาสใหม่) เมื่อ 'show' ถูกเพิ่มโดย Alpine.js */
 .notification.show {
     transform: translateX(-50%) translateY(0);
-    /* 2. เลื่อนขึ้นมา (แสดง) */
     opacity: 1;
 }
 
-/* (สไตล์สีเหมือนเดิม) */
 .notification-success {
     background-color: var(--color-success);
 }
@@ -947,7 +902,12 @@ span.highlight-text {
     margin-left: 15px;
 }
 
-/* --- 17. Profile Page Styles --- */
+/* --- 13. Profile Page Styles --- */
+/*
+ * สไตล์สำหรับหน้าแก้ไขโปรไฟล์
+ * ไฟล์ที่เกี่ยวข้อง: profile/edit.blade.php
+ * (และ partials: profile/partials/update-profile-information-form.blade.php, etc.)
+ */
 .profile-section {
     padding: 2rem;
     background-color: var(--color-bg-white);
@@ -974,7 +934,6 @@ span.highlight-text {
     line-height: 1.6;
 }
 
-/* (สำหรับจัดปุ่ม Save) */
 .profile-form-actions {
     display: flex;
     align-items: center;
@@ -982,37 +941,36 @@ span.highlight-text {
     margin-top: 1rem;
 }
 
-/* (สำหรับข้อความ "Saved.") */
 .profile-saved-message {
     color: var(--color-success);
     font-weight: 500;
     font-size: 0.9rem;
 }
 
-/* --- 18. Dashboard Stats Grid --- */
+/* --- 14. Dashboard Stats Grid --- */
+/*
+ * สไตล์สำหรับการ์ดสถิติ (4-column grid) ในหน้า Dashboard
+ * ไฟล์ที่เกี่ยวข้อง: dashboard.blade.php
+ */
 .stats-grid {
     display: grid;
-    /* 1 คอลัมน์ (มือถือ), 2 คอลัมน์ (แท็บเล็ต), 4 คอลัมน์ (เดสก์ท็อป) */
     grid-template-columns: 1fr;
     gap: 1.5rem;
     margin-top: 2rem;
 }
 
-/* (จอขนาดกลาง) */
 @media (min-width: 640px) {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* (จอขนาดใหญ่) */
 @media (min-width: 1024px) {
     .stats-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
-/* สไตล์ของการ์ดสถิติ */
 .stat-card {
     display: block;
     padding: 1.5rem 2rem;
@@ -1039,15 +997,15 @@ span.highlight-text {
     font-size: 2.5rem;
     font-weight: 700;
     color: var(--color-primary);
-    /* ใช้สีธีม */
     margin-top: 0.5rem;
     display: block;
-    /* ทำให้เป็น block */
 }
 
-/* --- 19. Landing Page Styles --- */
-
-/* (ทำให้ปุ่ม .btn-lg ใหญ่ขึ้น) */
+/* --- 15. Landing Page Styles --- */
+/*
+ * สไตล์สำหรับหน้าต้อนรับ (Homepage) สำหรับ Guest
+ * ไฟล์ที่เกี่ยวข้อง: welcome.blade.php
+ */
 .btn-lg {
     padding: 0.8rem 1.8rem;
     font-size: 1.1rem;
@@ -1061,13 +1019,11 @@ span.highlight-text {
     background-color: var(--color-bg-white);
 }
 
-/* 1. Header (ส่วนบน) */
 .landing-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 5%;
-    /* 5% padding 2 ข้าง */
     border-bottom: 1px solid var(--color-border-light);
 }
 
@@ -1090,7 +1046,6 @@ span.highlight-text {
     gap: 0.5rem;
 }
 
-/* 2. Content (ส่วนเนื้อหา) */
 .landing-content {
     flex-grow: 1;
     display: flex;
@@ -1116,7 +1071,6 @@ span.highlight-text {
     font-size: 1.5rem;
     font-weight: 400;
     color: var(--color-primary);
-    /* สีธีม */
     margin-bottom: 1.5rem;
 }
 
@@ -1133,7 +1087,11 @@ span.highlight-text {
     gap: 1rem;
 }
 
-/* --- 20. Guest Back Link --- */
+/* --- 16. Guest Back Link --- */
+/*
+ * สไตล์สำหรับลิงก์ 'กลับหน้าแรก' ในหน้า Guest
+ * ไฟล์ที่เกี่ยวข้อง: layouts/guest.blade.php
+ */
 .guest-back-link-wrapper {
     width: 100%;
     max-width: 450px;
@@ -1147,7 +1105,8 @@ span.highlight-text {
 .guest-back-link {
     font-size: 1rem;
     font-weight: 500;
-    color: var(--color-text-normal);
+    color: var(--color-text-base);
+    /* (เปลี่ยน) ใช้สี base */
     text-decoration: none;
     transition: color 0.2s ease;
     display: inline-flex;
@@ -1160,7 +1119,11 @@ span.highlight-text {
     text-decoration: underline;
 }
 
-/* --- 21. User Layout Styles --- */
+/* --- 17. User Layout Styles --- */
+/*
+ * โครงสร้างหน้าสำหรับ User ที่ล็อกอินแล้ว (ไม่ใช่ Admin)
+ * ไฟล์ที่เกี่ยวข้อง: layouts/user.blade.php (หรือ components/user-layout.blade.php)
+ */
 .user-layout-container {
     min-height: 100vh;
     background-color: var(--color-bg-page);
@@ -1209,9 +1172,12 @@ span.highlight-text {
     position: relative;
 }
 
-
-
-/* --- 22. Book Carousel Styles --- */
+/* --- 18. Book Carousel Styles --- */
+/*
+ * สไตล์สำหรับแถบเลื่อนหนังสือแนวนอน (Carousel)
+ * ไฟล์ที่เกี่ยวข้อง: user-home.blade.php (หน้าแรกของ User)
+ * books/index.blade.php (อาจใช้แสดงหนังสือแนะนำ)
+ */
 .book-carousel-section {
     margin-bottom: 2rem;
 }
@@ -1235,13 +1201,11 @@ span.highlight-text {
     display: flex;
     gap: 1.5rem;
     overflow-x: auto;
-    /* (ทำให้เลื่อนแนวนอนได้) */
     padding-bottom: 1rem;
 }
 
 .book-card {
     flex: 0 0 160px;
-    /* (กำหนดความกว้างตายตัว 160px) */
     text-decoration: none;
 }
 
@@ -1283,9 +1247,10 @@ span.highlight-text {
     font-weight: 600;
     color: var(--color-text-dark);
     line-height: 1.4;
-    /* (จำกัดข้อความ 2 บรรทัด) */
     display: -webkit-box;
     line-clamp: 2;
+    -webkit-line-clamp: 2;
+    /* (เพิ่ม) เพื่อรองรับ browser เก่า */
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -1295,16 +1260,18 @@ span.highlight-text {
     color: var(--color-text-light);
 }
 
-/* --- 23. Footer Styles --- */
+/* --- 19. Footer Styles --- */
+/*
+ * สไตล์สำหรับ Footer ท้ายเว็บ
+ * ไฟล์ที่เกี่ยวข้อง: layouts/partials/footer-admin.blade.php, layouts/partials/footer-user.blade.php
+ */
 .app-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     margin-top: auto;
     padding: 0.5rem 2rem;
     border-top: 1px solid var(--color-border-light);
-
     color: var(--color-text-light);
     font-size: 0.9rem;
 }
@@ -1339,33 +1306,31 @@ span.highlight-text {
     margin-top: 0;
 }
 
-/* --- 24. Search Clear Button --- */
+/* --- 20. Search Clear Button --- */
+/*
+ * สไตล์สำหรับปุ่ม 'x' (ล้าง) ภายในช่องค้นหา
+ * ไฟล์ที่เกี่ยวข้อง: admin/books/index.blade.php (หรือ partial ของ search form)
+ */
 .search-input-wrapper {
     position: relative;
     display: flex;
     flex-grow: 1;
 }
 
-/* (ปรับ Input ให้เต็ม wrapper) */
 .search-input-wrapper .form-control {
     width: 100%;
-    /* (เพิ่ม padding ขวา เพื่อไม่ให้ข้อความทับปุ่ม x) */
     padding-right: 2.5rem;
 }
 
-/* (สไตล์ปุ่ม x) */
 .search-clear-btn {
     position: absolute;
     top: 50%;
     right: 0.75rem;
     transform: translateY(-50%);
-
     background: none;
     border: none;
     cursor: pointer;
-
     font-size: 1.75rem;
-    /* (ขนาดตัว x) */
     font-weight: 600;
     color: var(--color-text-light);
     padding: 0 0.5rem;
@@ -1376,27 +1341,25 @@ span.highlight-text {
     color: var(--color-danger);
 }
 
-/* --- 25. User Genre Sidebar --- */
-
-/* 1. คอนเทนเนอร์หลักของหน้า User (จากเดิม) */
+/* --- 21. User Genre Sidebar --- */
+/*
+ * สไตล์สำหรับ Sidebar (เมนูหมวดหมู่) ในหน้า User
+ * ไฟล์ที่เกี่ยวข้อง: books/index.blade.php (Layout 2-column)
+ */
 .user-main-content {
     max-width: 1536px;
     min-width: 1280px;
     margin: 0 auto;
 }
 
-/* 2. (ใหม่) Grid 2 คอลัมน์ */
 .user-grid-container {
     display: grid;
-    /* (Sidebar 240px, เนื้อหา 1fr (ที่เหลือ)) */
     grid-template-columns: 240px 1fr;
     gap: 2rem;
     min-width: 1280px;
     max-width: 1536px;
-    /* (ระยะห่างระหว่าง Sidebar กับเนื้อหา) */
 }
 
-/* 3. (ใหม่) Sidebar Genres */
 .user-genres-sidebar {
     background-color: var(--color-bg-white);
     border-radius: var(--border-radius-card);
@@ -1424,7 +1387,6 @@ span.highlight-text {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    /* (ระยะห่างระหว่างลิงก์) */
 }
 
 .genre-link {
@@ -1445,7 +1407,7 @@ span.highlight-text {
 .genre-link.active {
     background-color: var(--color-primary);
     color: var(--color-text-white);
-    font-weight: 600;   
+    font-weight: 600;
 }
 
 @media (max-width: 768px) {
@@ -1457,4 +1419,67 @@ span.highlight-text {
         position: static;
         margin-bottom: 1rem;
     }
+}
+
+/* --- 26. Confirm Delete Button --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+    padding: 1rem;
+
+    /* (สำหรับ Alpine.js Transition) */
+    transition: opacity 0.3s ease;
+}
+
+/* 2. กล่องเนื้อหา (Dialog Box) */
+.modal-content {
+    background-color: var(--color-bg-white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--shadow-card);
+    width: auto;
+    max-width: 600px;
+    /* จำกัดความกว้างสูงสุด */
+    text-align: center;
+
+    /* (สำหรับ Alpine.js Transition) */
+    transition: all 0.3s ease;
+    transform: scale(0.95);
+    /* เริ่มต้นที่ย่อส่วนเล็กน้อย */
+}
+
+/* 3. สไตล์เนื้อหาข้างใน */
+.modal-content p {
+    font-size: 1.25rem;
+    color: var(--color-text-dark);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* (ใช้คลาสจากไฟล์ css เดิม) ทำให้ชื่อที่ไฮไลต์ชัดขึ้น */
+.modal-content p span {
+    color: var(--color-danger);
+    font-weight: bold;
+}
+
+/* 4. จัดการปุ่ม (ให้ปุ่ม "Yes" และ "Cancel" อยู่ข้างกัน) */
+.modal-content form.modal-delete-form {
+    display: inline-block;
+    /* ทำให้ฟอร์มอยู่บรรทัดเดียวกับปุ่ม */
+    margin: 0;
+}
+
+/* (ไม่จำเป็น แต่ช่วยให้ปุ่มไม่ชิดกันเกินไป) */
+.modal-content .btn {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
 }

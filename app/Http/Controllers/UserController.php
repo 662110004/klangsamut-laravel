@@ -23,7 +23,7 @@ class UserController extends Controller
                     ->orWhere('email', 'like', "%{$search}%")
                     ->orWhere('role', 'like', "%{$search}%");
             })
-            ->orderBy('id') // เรียงตามชื่อ
+            ->orderBy('id')
             ->paginate(10)
             ->withQueryString();
 
@@ -43,7 +43,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        // (สำคัญ!) ตรวจสอบว่าใช่ตัวเองหรือไม่
+        // ตรวจสอบว่าใช่ตัวเองหรือไม่
         if (Auth::id() === $user->id) {
             // ถ้าใช่ ห้ามลบ
             return redirect(session()->get('bookmark_url.users', route('admin.users.index')))

@@ -1,4 +1,10 @@
 <x-guest-layout>
+    <div class="guest-back-link-wrapper">
+        <a href="{{ route('home') }}" class="guest-back-link">
+            &larr; Back to Welcome
+        </a>
+    </div>
+
     <x-slot name="title">
         {{ __('Login To KLANGSAMUT') }}
     </x-slot>
@@ -33,12 +39,6 @@
                 <input id="remember_me" type="checkbox" class="rounded border-gray-300 shadow-sm" name="remember">
                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
-
-            @if (Route::has('password.request'))
-            <a class="guest-link" href="{{ route('password.request') }}">
-                {{ __('Forgot your password?') }}
-            </a>
-            @endif
         </div>
 
         <div class="guest-form-action">

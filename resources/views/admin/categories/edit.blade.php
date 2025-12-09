@@ -1,12 +1,5 @@
 <x-app-layout>
     <div class="container">
-        <div class="breadcrumbs">
-            <a href="{{ route('dashboard') }}">Dashboard</a>
-            <span class="separator">/</span>
-            <a href="{{ route('admin.categories.index') }}">Manage Categories</a>
-            <span class="separator">/</span>
-            <span>Edit Category</span>
-        </div>
         <h1>Edit Category</h1>
 
         <form action="{{ route('admin.categories.update', $category) }}" method="POST" x-data="{ showConfirm: false }">

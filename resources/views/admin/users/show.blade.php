@@ -4,7 +4,7 @@
         <div class="book-show-header-actions">
             <div class="left-actions">
                 <a href="{{ session()->get('bookmark_url.users', route('admin.users.index')) }}" class="btn btn-secondary">
-                    &larr; Back to List
+                    &larr; Back
                 </a>
             </div>
 
@@ -18,7 +18,7 @@
                     <button @click.prevent="showConfirm = true" class="btn btn-danger">Delete This User</button>
                     <div x-show="showConfirm" class="modal-overlay" @click.away="showConfirm = false" x-cloak>
                         <div class="modal-content">
-                            <p>Are you sure you want to delete '{{ $user->name }}'?</p>
+                            <p>Are you sure you want to delete <span>"{{ $user->name }}" </span>?</p>
                             <form method="POST" action="{{ route('admin.users.destroy', $user) }}" class="modal-delete-form">
                                 @csrf
                                 @method('DELETE')

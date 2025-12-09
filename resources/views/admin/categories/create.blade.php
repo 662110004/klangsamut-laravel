@@ -1,12 +1,5 @@
 <x-app-layout>
     <div class="container">
-        <div class="breadcrumbs">
-            <a href="{{ route('dashboard') }}">Dashboard</a>
-            <span class="separator">/</span>
-            <a href="{{ route('admin.categories.index') }}">Manage Categories</a>
-            <span class="separator">/</span>
-            <span>Create New</span>
-        </div>
         <h1>Add New Category</h1>
 
         <form action="{{ route('admin.categories.store') }}" method="POST">

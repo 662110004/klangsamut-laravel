@@ -34,8 +34,6 @@ session()->put('bookmark_url.return_to_list', request()->fullUrl());
         </form>
         <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">Add New Category</a>
 
-
-
         <table class="table">
             <div class="paginate">
                 {{ $categories->links() }}

@@ -30,7 +30,7 @@ $layoutComponent = (Auth::check() && Auth::user()->role == 'admin')
                     <button @click.prevent="showConfirm = true" class="btn btn-danger">Delete</button>
                     <div x-show="showConfirm" class="modal-overlay" @click.away="showConfirm = false" x-cloak>
                         <div class="modal-content">
-                            <p>Are you sure you want to delete '{{ $book->title }}'?</p>
+                            <p>Are you sure you want to delete <span>"{{ $book->title }}" </span>?</p>
                             <form method="POST" action="{{ route('admin.books.destroy', $book) }}" class="modal-delete-form">
                                 @csrf
                                 @method('DELETE')

@@ -1,12 +1,5 @@
 <x-app-layout>
     <div class="container">
-        <div class="breadcrumbs">
-            <a href="{{ route('dashboard') }}">Dashboard</a>
-            <span class="separator">/</span>
-            <a href="{{ route('admin.authors.index') }}">Manage Authors</a>
-            <span class="separator">/</span>
-            <span>Create New</span>
-        </div>
         <h1>Add New Author</h1>
 
         <form action="{{ route('admin.authors.store') }}" method="POST" enctype="multipart/form-data">

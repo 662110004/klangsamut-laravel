@@ -27,6 +27,16 @@ session()->put('bookmark_url.return_to_list', request()->fullUrl());
                     x-cloak>
                     &times;
                 </button>
+                <!-- x-show="searchQuery.length > 0" คือคำสั่งที่บอกว่า จงแสดงปุ่มนี้ ก็ต่อเมื่อใน searchbar มีอักษร > 0 -->
+                <!-- 
+                @click="searchQuery = ''; $nextTick(() => $el.closest('form').submit());"  
+                1. searchQuery = ''; คือ สั่งให้ล้างค่าตัวแปร searchQuery ให้กลายเป็นค่าว่าง
+                2. $nextTick(() => ...) คือ สั่งให้ "รอ" จนกว่า Alpine.js จะอัปเดตหน้าจอ (ล้างข้อความ) เสร็จเรียบร้อยก่อน แล้วค่อยทำคำสั่งข้างใน
+                3. $el คือ ปุ่ม "x"
+                4. .closest('form') คือ ให้วิ่งหา <form> ที่อยู่ใกล้ที่สุดที่ครอบมันอยู่
+                5. คือ สั่งให้ส่งฟอร์มนั้นทันที
+                -->
+                <!-- x-cloak คือ ทำหน้าที่ซ่อนปุ่มนี้ไว้ก่อนที่ Alpine.js จะโหลดเสร็จ เพื่อป้องกันไม่ให้ผู้ใช้เห็นปุ่ม "x" กระพริบแวบหนึ่งตอนโหลดหน้าเว็บ -->
             </div>
 
             <button type="submit" class="btn btn-primary">Search</button>

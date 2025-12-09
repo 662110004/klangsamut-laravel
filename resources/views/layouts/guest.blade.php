@@ -9,11 +9,6 @@
 
     <div class="guest-container">
 
-        <div class="guest-back-link-wrapper">
-            <a href="{{ route('home') }}" class="guest-back-link">
-                &larr; Back to Welcome
-            </a>
-        </div>
         <div class="guest-card">
 
             <img src="{{ asset('pictures/Web-Logo.png') }}" alt="KlangSamut Logo" class="guest-logo">

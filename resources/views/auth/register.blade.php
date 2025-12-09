@@ -1,4 +1,10 @@
 <x-guest-layout>
+    <div class="guest-back-link-wrapper">
+        <a href="{{ route('home') }}" class="guest-back-link">
+            &larr; Back to Welcome
+        </a>
+    </div>
+
     <x-slot name="title">
         {{ __('Register to KLANGSAMUT') }}
     </x-slot>

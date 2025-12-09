@@ -1,12 +1,5 @@
 <x-app-layout>
     <div class="container">
-        <div class="breadcrumbs">
-            <a href="{{ route('dashboard') }}">Dashboard</a>
-            <span class="separator">/</span>
-            <a href="{{ route('admin.books.admin_index') }}">Manage Books</a>
-            <span class="separator">/</span>
-            <span>Edit Book</span>
-        </div>
         <h1>Edit Book</h1>
 
         <form action="{{ route('admin.books.update', $book) }}" method="POST" enctype="multipart/form-data" x-data="{ showConfirm: false }">
